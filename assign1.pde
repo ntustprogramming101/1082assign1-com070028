@@ -17,12 +17,12 @@ void setup() {
   size(640, 480, P2D);
   // Enter Your Setup Code Here
 
-bg= loadImage(""img/bg.jpg"); 
-soil= loadImage(""img/soil.png"); 
-groundHog= loadImage(""img/groundhog.png");
-life= loadImage(""img/life.png");
-robot= loadImage(""img/robot.png");
-soldier= loadImage(""img/soldier.png");
+bg= loadImage("img/bg.jpg"); 
+soil= loadImage("img/soil.png"); 
+groundHog= loadImage("img/groundhog.png");
+life= loadImage("img/life.png");
+robot= loadImage("img/robot.png");
+soldier= loadImage("img/soldier.png");
 
 
 
