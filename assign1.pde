@@ -2,16 +2,20 @@
 
 PImage bg,soil,groundHog,life,robot,soldier;
 
-float measure=80;
-int soldierY=80*floor(random(3,6));
-float soldierX=0;
+final int offsetHeight = 37;
+final int offsetWidth = 25;
 
-float robotX=random(160,560); 
-int robotY=80*floor(random(3,6));
+int measure=80;
+int soldierY=80*floor(random(2,6));
+int soldierX=-80;
+
+float robotX=floor(random(160,560)); 
+float robotY=80*floor(random(2,6));
 
 float lazorSpeed=2;
-float  lazorX=robotX-25; 
-int lazorY=robotY+37;
+float  lazorX1; //left X
+float  lazorX2; //right X
+float lazorY;
 
 void setup() {
   size(640, 480, P2D);
@@ -24,19 +28,30 @@ life= loadImage("img/life.png");
 robot= loadImage("img/robot.png");
 soldier= loadImage("img/soldier.png");
 
+  lazorX1 = robotX+offsetWidth;
+  lazorX2 = lazorX1;
+  lazorY = robotY+offsetHeight;
 
 
 }
 
 void draw() {
-  // Enter Your Code Here
 
+//bg initial
 image(bg,0,0);
 image(soil,0,2*measure);
 //life
 image(life,10,10);
 image(life,80,10);
 image(life,150,10);
+
+//sun
+noStroke();
+fill(255, 255, 0);
+ellipse(590,50,130,130);
+noStroke();
+fill(253,184, 19);
+ellipse(590,50,120,120);
 
 //grass
 fill(124,204,25);
@@ -55,22 +70,32 @@ soldierX%=640+80;
 //robot
 image(robot,robotX,robotY);
 
-//robot lazor
-fill(255,0,0);
-rect(lazorX,lazorY,40,10);
-lazorX-=2;
+  //robot lazor initial
+stroke(255,0,0);
+strokeWeight(10);
+line(lazorX1,lazorY,lazorX2,lazorY);
 
-if(lazorX<-40){lazorX=robotX-25;
+    //robot laser
+      //laser's offset
+      line(lazorX1, lazorY, lazorX2, lazorY);
+    
+      ////robot lazor moving
+      if(lazorX2 > robotX-measure*2){
+        
+        if(lazorX1-lazorX2>=40){  // the lazor width
+        lazorX2-= 2;  
+        lazorX1 -= 2;
+        }else{
+          lazorX2 -= 2;
+        }
+        
+      }else{
+        //reset the laser
+        lazorX1 = robotX+offsetWidth;
+        lazorX2 = lazorX1;
+      }
 
-}
-
-//sun
-fill(255, 255, 0);
-ellipse(590,50,130,130);
-
-fill(253,184, 19);
-ellipse(590,50,120,120);
 
 
-
+  
 }
